@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
     "fs9-training.onrender.com",
     "localhost",
     "127.0.0.1",
+    "fs9.onrender.com",
 ]
 
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'rest_framework',
+    'corsheaders',
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

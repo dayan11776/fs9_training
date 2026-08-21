@@ -9,7 +9,7 @@
       "description": "Cisco - Access Switch device for enterprise networks.",
       "countInStock": 34,
       "image": "product_images/1.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -22,7 +22,7 @@
       "description": "Cisco - Access Switch device for enterprise networks.",
       "countInStock": 90,
       "image": "product_images/2.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -35,7 +35,7 @@
       "description": "Cisco - Core Switch device for enterprise networks.",
       "countInStock": 65,
       "image": "product_images/3.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -48,7 +48,7 @@
       "description": "Cisco - Modular Access Switch device for enterprise networks.",
       "countInStock": 22,
       "image": "product_images/4.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -61,7 +61,7 @@
       "description": "Cisco - Data Center Switch device for enterprise networks.",
       "countInStock": 10,
       "image": "product_images/5.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -74,7 +74,7 @@
       "description": "Cisco - Branch Router device for enterprise networks.",
       "countInStock": 54,
       "image": "product_images/6.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -87,7 +87,7 @@
       "description": "Cisco - Branch Router device for enterprise networks.",
       "countInStock": 21,
       "image": "product_images/7.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -100,7 +100,7 @@
       "description": "Cisco - Aggregation Router device for enterprise networks.",
       "countInStock": 81,
       "image": "product_images/8.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -113,7 +113,7 @@
       "description": "Cisco - Next-Gen Firewall device for enterprise networks.",
       "countInStock": 47,
       "image": "product_images/9.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -126,7 +126,7 @@
       "description": "Cisco - Next-Gen Firewall device for enterprise networks.",
       "countInStock": 47,
       "image": "product_images/10.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -139,7 +139,7 @@
       "description": "Cisco Meraki - SD-WAN & Security device for enterprise networks.",
       "countInStock": 73,
       "image": "product_images/11.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -152,7 +152,7 @@
       "description": "Cisco Meraki - SD-WAN & Security device for enterprise networks.",
       "countInStock": 36,
       "image": "product_images/12.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -165,7 +165,7 @@
       "description": "Cisco Meraki - SD-WAN & Security device for enterprise networks.",
       "countInStock": 67,
       "image": "product_images/13.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -178,7 +178,7 @@
       "description": "Cisco Meraki - Wireless AP device for enterprise networks.",
       "countInStock": 39,
       "image": "product_images/14.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -191,7 +191,7 @@
       "description": "Cisco Meraki - Wireless AP device for enterprise networks.",
       "countInStock": 32,
       "image": "product_images/15.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -204,7 +204,7 @@
       "description": "Fortinet - Next-Gen Firewall device for enterprise networks.",
       "countInStock": 55,
       "image": "product_images/16.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -217,7 +217,7 @@
       "description": "Fortinet - Next-Gen Firewall device for enterprise networks.",
       "countInStock": 49,
       "image": "product_images/17.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -230,7 +230,7 @@
       "description": "Fortinet - High-Performance NGFW device for enterprise networks.",
       "countInStock": 45,
       "image": "product_images/18.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -243,7 +243,7 @@
       "description": "Palo Alto Networks - Next-Gen Firewall device for enterprise networks.",
       "countInStock": 17,
       "image": "product_images/19.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -256,7 +256,7 @@
       "description": "Palo Alto Networks - Next-Gen Firewall device for enterprise networks.",
       "countInStock": 29,
       "image": "product_images/20.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -269,7 +269,7 @@
       "description": "Palo Alto Networks - Mid-Range NGFW device for enterprise networks.",
       "countInStock": 92,
       "image": "product_images/21.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -282,7 +282,7 @@
       "description": "Palo Alto Networks - High-Performance NGFW device for enterprise networks.",
       "countInStock": 53,
       "image": "product_images/22.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -295,7 +295,7 @@
       "description": "Check Point - Firewall device for enterprise networks.",
       "countInStock": 24,
       "image": "product_images/23.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -308,7 +308,7 @@
       "description": "Check Point - High-End Firewall device for enterprise networks.",
       "countInStock": 35,
       "image": "product_images/24.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -321,7 +321,7 @@
       "description": "HPE - Access Switch device for enterprise networks.",
       "countInStock": 41,
       "image": "product_images/25.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -334,7 +334,7 @@
       "description": "HPE - Core Switch device for enterprise networks.",
       "countInStock": 54,
       "image": "product_images/26.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -347,7 +347,7 @@
       "description": "Huawei - Data Center Switch device for enterprise networks.",
       "countInStock": 81,
       "image": "product_images/27.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -360,7 +360,7 @@
       "description": "Dell EMC - Access Switch device for enterprise networks.",
       "countInStock": 82,
       "image": "product_images/28.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -373,7 +373,7 @@
       "description": "Dell EMC - Data Center Switch device for enterprise networks.",
       "countInStock": 20,
       "image": "product_images/29.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -386,7 +386,7 @@
       "description": "Extreme Networks - Access Switch device for enterprise networks.",
       "countInStock": 11,
       "image": "product_images/30.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -399,7 +399,7 @@
       "description": "Cisco - Wireless AP device for enterprise networks.",
       "countInStock": 34,
       "image": "product_images/31.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -412,7 +412,7 @@
       "description": "Cisco - Wireless AP device for enterprise networks.",
       "countInStock": 83,
       "image": "product_images/32.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -425,7 +425,7 @@
       "description": "Cisco - Wireless AP device for enterprise networks.",
       "countInStock": 73,
       "image": "product_images/33.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   },
   {
@@ -438,7 +438,7 @@
       "description": "Cisco - Wireless AP device for enterprise networks.",
       "countInStock": 99,
       "image": "product_images/34.png",
-      "date_created": "2025-06-26"
+      "createdAt": "2025-06-26"
     }
   }
 ]

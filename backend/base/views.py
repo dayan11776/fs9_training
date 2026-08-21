@@ -4,21 +4,21 @@ from django.shortcuts import get_object_or_404
 from django.db import transaction
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
 from rest_framework.response import Response 
-from .models import Product, cartUsergit remote set-url origin https://github.com/devprojects1126-beep/FS-9_Bryan-Tapel.git                                    
-from .serializers import ProductSerializer,RegisterSerializer
+from .models import Product, cartUser
+from .serializers import ProductSerializer, RegisterSerializer
 
-@api_view(["POST"])
+
+@api_view(['POST'])
 def register_user(request):
     serializer = RegisterSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        return Response(message="User registered successfully.", status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'message': 'User registered successfully'}, status = status.HTTP_201_CREATED)  
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)   
 
 @api_view(['GET'])
 def product_list(request):
@@ -267,70 +267,79 @@ def delete_cart(request, pk):
         {"detail": "Cart item deleted."},
         status=status.HTTP_200_OK
     )
-    
+
+
 import uuid
 from decimal import Decimal
 from django.conf import settings
 from django.db import transaction
-import  requests
+import requests
 from .models import paymentMethod, shippingsAddress
 from .serializers import CheckoutSerializer
-@api_view(["POST"])
+
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def create_xendit_payment(requesst):
+def create_xendit_payment(request):
     serializer = CheckoutSerializer(data=request.data)
-    
+
     if not serializer.is_valid():
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     user = request.user
     data = serializer.validated_data
-    
+
     if not user.email:
         return Response(
-            {'error': 'User must have an email address before checkout.'},
-            status=status.HTTP_400_BAD_REQUEST
+            {'error': 'Your Account needs an email address before checkout.'},
+            status=status.HTTP_400_BAD_REQUEST,
         )
-        
-    cart_item = cartUser.objects.filter(user=user).selected_related('product')
-    
+
+
+    cart_items = cartUser.objects.filter(user=user).select_related('product')
+
     if not cart_items.exists():
         return Response(
-            {'error': 'Cart is empty. Add items to cart before checkout.'},
+            {'error': 'Cart is empty'},
             status=status.HTTP_400_BAD_REQUEST
         )
-        
-    total_price = sum(item.product.product_price * item.qty for item in cart_items)
-    
+
+    total_price = sum(
+        item.product.product_price * item.qty
+        for item in cart_items
+        )
+
+
     if not settings.XENDIT_SECRET_KEY:
         return Response(
-            {'error': 'Xendit secret key is not configured.'},
+            {'error': 'XENDIT_SECRET_KEY is not configured.'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
-        
-    xendit_amount = float(Decimal(total_price).quantize(Decimal("0.01")))
-    external_id = f'order-{user.id}-{uuid.uuid4().hex}'
-    
+
+
+    xendit_amount = float(Decimal(total_price).quantize(Decimal('0.01')))
+    external_id = f'order-{user.id}-{uuid.uuid4().hex}'  
+
     payload = {
         'external_id': external_id,
         'amount': xendit_amount,
         'currency': 'PHP',
         'payer_email': user.email,
-        'description': 'Payment for order',
-        'success_redirect_url':settings.XENDIT_SUCCESS_REDIRECT_URL,
+        'description': 'Order Payment',
+        'success_redirect_url': settings.XENDIT_SUCCESS_REDIRECT_URL,
         'failure_redirect_url': settings.XENDIT_FAILURE_REDIRECT_URL,
-        'customer':{
+        'customer': {
             'given_names': data['fullName'],
-            'email': user.email,
+            'email': user.email
         },
-        'customer_notification_preference':{
-            'invoice_created': ['email'],
+        'customer_notification_preference': {
+            'invoices_created': ['email'],
             'invoice_paid': ['email'],
             'invoice_expired': ['email'],
-        },
+        }
+
     }
-    
-    
+
+
     try:
         xendit_response = requests.post(
             'https://api.xendit.co/v2/invoices',
@@ -339,42 +348,39 @@ def create_xendit_payment(requesst):
             timeout=30,
         )
         xendit_response.raise_for_status()
-        
+
         result = xendit_response.json()
     except requests.RequestException as exc:
         error_message = str(exc)
         if getattr(exc, 'response', None) is not None:
             try:
-                error_message = exc.response.json().get('message', str(exc))
+                error_message = exc.response.json()
             except ValueError:
                 error_message = exc.response.text
         return Response(
             {'error': error_message},
             status=status.HTTP_400_BAD_REQUEST
         )
-        
+
     if 'invoice_url' not in result or 'id' not in result:
-        return Response(
-            {'error':result},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-        
+        return Response({'error': result}, status=status.HTTP_400_BAD_REQUEST)
+
     checkout_url = result['invoice_url']
     xendit_invoice_id = result['id']
     xendit_status = result.get('status', 'PENDING')
-    
+
     with transaction.atomic():
-        payment = paymentMethod.objects.create(
-            user = user,
-            totalPrice = total_price,
-            isPaid = False,
+        payment = paymentMethod.objects.create (
+            user=user,
+            totalPrice=total_price,
+            isPaid=False,
             xendit_invoice_id=xendit_invoice_id,
-            xendit_external_id = external_id,
-            xendit_status = xendit_status,
+            xendit_external_id=external_id,
+            xendit_status=xendit_status,
         )
-        
+
         shippingsAddress.objects.create(
-            paymentID=payment,
+            paymentId=payment,
             fullName = data['fullName'],
             address = data['address'],
             city = data['city'],
@@ -383,58 +389,117 @@ def create_xendit_payment(requesst):
         )
     return Response({'checkout_url': checkout_url}, status=status.HTTP_200_OK)
 
-@csrf_exempt
+
+import json
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.permissions import AllowAny
+
+
+
 @api_view(['POST'])
+@permission_classes([AllowAny])
+
 def xendit_webhook(request):
-    try: 
-        callback_token = request.header.get('x-callback-token')
+    try:
+        # Xendit callback verification
+        callback_token = request.headers.get('x-callback-token')
 
         if not settings.XENDIT_CALLBACK_TOKEN:
-            return Response({'error': 'Invalid xendit callback token'}, status=status.HTTP_403_FORBIDDEN)
-        if callback_token != settings.XENDIT_CALLBACK_TOKEN:
-            return Response({'error': 'Invalid Xendit callback token.'}, status=status.HTTP_403_FORBIDDEN)
+            return Response(
+                {'error': 'XENDIT_CALLBACK_TOKEN is not configured.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
-        payload = json.loads(request.body)
+        if callback_token != settings.XENDIT_CALLBACK_TOKEN:
+            return Response(
+                {'error': 'Invalid Xendit callback token.'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        # DRF already parses JSON for application/json requests
+        payload = request.data
 
         xendit_invoice_id = payload.get('id')
         xendit_external_id = payload.get('external_id')
         xendit_status = payload.get('status')
 
         if not xendit_invoice_id and not xendit_external_id:
-            return Response({'error': 'Missing Xendit Invoice reference'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {'error': 'Missing Xendit invoice reference.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         payment = None
-        if xendit_invoice_id:
-            payment = paymentMethod.objects.filter(xendit_invoice_id=xendit_invoice_id,).first()
-        if not payment and xendit_external_id:
-            payment = paymentMethod.objects.filter(xendit_external_id=xendit_external_id,).first()
-        if not payment:
-            return Response({'message': 'Payment not found'}, status=status.HTTP_404_NOT_FOUND)
 
+        if xendit_invoice_id:
+            payment = paymentMethod.objects.filter(
+                xendit_invoice_id=xendit_invoice_id
+            ).first()
+
+        if not payment and xendit_external_id:
+            payment = paymentMethod.objects.filter(
+                xendit_external_id=xendit_external_id
+            ).first()
+
+        if not payment:
+            return Response(
+                {'message': 'Payment not found.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # Update Xendit status
         if xendit_status:
             payment.xendit_status = xendit_status
-            payment.save(update_field=['xendit_status'])
+            payment.save(update_fields=['xendit_status'])
 
+        # Ignore non-paid events
         if xendit_status not in ['PAID', 'SETTLED']:
-            return Response({'message': 'Xendit event received'}, status=status.HTTP_200_OK)
+            return Response(
+                {'message': 'Xendit event received.'},
+                status=status.HTTP_200_OK
+            )
 
+        # Make webhook idempotent
         if payment.isPaid:
             return Response(
-                {'message': 'Already Processed'}, status=status.HTTP_200_OK
+                {'message': 'Payment already processed.'},
+                status=status.HTTP_200_OK
             )
+
         payment.mark_paid()
 
-        return Response({'message': 'Payment confirmed, Order Items Created'}, status=status.HTTP_200_OK)
-    except(KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
-        return Response({'error': str(exc)}, status=status.HTTP_400_BAD_REQUEST)
-    
+        return Response(
+            {
+                'message': (
+                    'Payment confirmed. '
+                    'Order items created and cart cleared.'
+                )
+            },
+            status=status.HTTP_200_OK
+        )
+
+    except Exception as exc:
+        return Response(
+            {'error': str(exc)},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+
 from .serializers import PaymentMethodSerializer
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def list_user_orders(request):
     payments = (
-        paymentMethod.objects.filter(user=requests.user).order_by('-id').prefetch_related('orderitem_set_prodcut', 'shippingaddress_set')
+        paymentMethod.objects
+        .filter(user=request.user)
+        .order_by('-id')
+        .prefetch_related('orderitem_set__product')
     )
 
-    serializer = PaymentMethodSerializer(payments, many=True)
+    serializer = PaymentMethodSerializer(
+        payments,
+        many=True,
+        context={'request': request}
+    )
+
     return Response(serializer.data)

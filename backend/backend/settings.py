@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1zu4gc9j&^f$mhn=r*azh0u97hs_%y6x2sd-1i0u$4u)c(0osu'
+SECRET_KEY = 'django-insecure-f%x2vg986@atf@d%!)_fxag6(^rzihfe6hvdb@=p1sn)_fl)i2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'rest_framework',
-    "corsheaders",
 ]
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -59,8 +60,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [    
-    "http://localhost:5173",
+CORS_ALLOWED_ORIGINS = [
+  'http://localhost:5173',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -90,10 +91,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'NRbWmITKZLGIplUJiUqWrOlVdHgGdQYt',
-        'HOST': 'mainline.proxy.rlwy.net',
-        'PORT': '12321',
+        'USER':'postgres',
+        'PASSWORD':'CABhzKWZvaTjDqShmLgBRLnzvzkMXegI',
+        'HOST':'altaria.proxy.rlwy.net',
+        'PORT':'40227',
     }
 }
 
@@ -136,8 +137,7 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/images/'
 MEDIA_ROOT = 'static/images'
 
-
-XENDIT_SECRET_KEY = 'xnd_development_KwKmHU09Am9KRTjdBnXq358kkycUZvVPXB02eZTOtxcHLxOPqxUaT9M20Ew4Ajz'
-XENDIT_SUCCESS_REDIRECT_URL = 'http://localhost:5173/payment-success'
-XENDIT_FAILURE_REDIRECT_URL = 'http://localhost:5173/payment-failed'
-XENDIT_CALLBACK_TOKEN = 'dR0QYuxRG71IGaFOmrmqRe8amw07aRIBo9B2SAJqILATtcJD'
+XENDIT_SECRET_KEY = "xnd_development_KwKmHU09Am9KRTjdBnXq358kkycUZvVPXB02eZTOtxcHLxOPqxUaT9M20Ew4Ajz"
+XENDIT_CALLBACK_TOKEN = "dR0QYuxRG71IGaFOmrmqRe8amw07aRIBo9B2SAJqILATtcJD"
+XENDIT_SUCCESS_REDIRECT_URL = "http://localhost:5173/payment-success"
+XENDIT_FAILURE_REDIRECT_URL = "http://localhost:5173/payment-failed"

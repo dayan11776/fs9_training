@@ -1,17 +1,2 @@
 Documentation_FST
-venv/
-
-# Local configuration and secrets
-.env
-.env.*
-!.env.example
-
-# Python-generated files
-__pycache__/
-*.py[cod]
-.pytest_cache/
-
-# Front-end dependencies and build output
-node_modules/
-dist/
-build/
+venv

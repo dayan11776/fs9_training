@@ -8,6 +8,9 @@ from .views import (
     add_to_cart,
     update_cart,
     delete_cart,
+    create_xendit_payment,
+    xendit_webhook,
+    list_user_orders
 )
 
 from rest_framework_simplejwt.views import (
@@ -69,4 +72,8 @@ urlpatterns = [
         delete_cart,
         name='delete_cart'
     ),
+
+    path('checkout/xendit/', create_xendit_payment, name='create_xendit_payment'),
+    path('webhook/xendit/', xendit_webhook, name='xendit_webhook'),
+    path('orders/', list_user_orders, name='orders')
 ]

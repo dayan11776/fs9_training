@@ -66,6 +66,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOW_ALL_ORIGINS  = True
+
 CORS_ALLOWED_ORIGINS = [
   'http://localhost:5173',
   'https://fs9-coral.vercel.app',
